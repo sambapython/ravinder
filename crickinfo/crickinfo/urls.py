@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
 from info.views import fun
-from service.views import CPU
+from service.views import CPU, PlayerAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('players/', fun),
-    path("get_cpu_cores/",CPU.as_view())
+    path("get_cpu_cores/",CPU.as_view()),
+    path("create_player/",PlayerAPIView.as_view()),
 ]
