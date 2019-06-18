@@ -1,0 +1,18 @@
+django-admin startproject <prject-name>
+
+goto project folder
+python manage.py startapp <app-name>
+
+python manage.py runserver
+
+python manage.py makemigrations
+python manage.py migrate
+
+if you want to practice
+python manage.py shell
+
+
+MYSQL:
+show databases;
+use db1;
+show tables;
