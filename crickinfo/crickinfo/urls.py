@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.http import HttpResponse
 from info.views import fun
-from service.views import CPU, PlayerAPIView
+from service.views import CPU, PlayerAPIView, MatchAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,6 @@ urlpatterns = [
     path("get_cpu_cores/",CPU.as_view()),
     re_path("player/(?P<pk>[0-9]+)/",PlayerAPIView.as_view()),
     path("player/",PlayerAPIView.as_view()),
+    re_path("match/(?P<pk>[0-9]+)/",MatchAPIView.as_view()),
+    path("match/",MatchAPIView.as_view()),
 ]
