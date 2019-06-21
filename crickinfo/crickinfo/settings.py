@@ -90,7 +90,7 @@ DATABASES = {
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': 'root',
-        'NAME': 'db1'
+        'NAME': 'db2'
     }
 }
 
@@ -144,3 +144,7 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
         )
 }
+AUTH_USER_MODEL = "service.UserProfile"
+
+
+
