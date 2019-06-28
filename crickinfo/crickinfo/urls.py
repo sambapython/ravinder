@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.http import HttpResponse
 from info.views import fun
 from service.views import CPU, PlayerAPIView, MatchAPIView, UserAPIView
+from rest_framework_swagger.views import get_swagger_view
+schema_view = get_swagger_view(title='Pastebin API')
 
 urlpatterns = [
+    path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('players/', fun),
     path("get_cpu_cores/",CPU.as_view()),
@@ -28,4 +31,5 @@ urlpatterns = [
     re_path("match/(?P<pk>[0-9]+)/",MatchAPIView.as_view()),
     path("match/",MatchAPIView.as_view()),
     path("user/",UserAPIView.as_view()),
+    path("ui/",schema_view),
 ]

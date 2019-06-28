@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'service',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,6 @@ WSGI_APPLICATION = 'crickinfo.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-'''
 
 DATABASES = {
     'default': {
@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': 'db2'
     }
 }
-
+'''
 
 
 # Password validation
@@ -136,8 +136,8 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        #'rest_framework.authentication.TokenAuthentication',
     ),
     "DEFAULT_PERMISSION_CLASSES":(
         #"rest_framework.permissions.IsAuthenticatedOrReadOnly",
@@ -145,6 +145,16 @@ REST_FRAMEWORK = {
         )
 }
 AUTH_USER_MODEL = "service.UserProfile"
-
+SWAGGER_SETTINGS = {
+  'SECURITY_DEFINITIONS': {
+    'api_key': {
+      'type': 'apiKey',
+      'in': 'header',
+      'name': 'Authorization'
+    }
+    },
+}
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
 
 
