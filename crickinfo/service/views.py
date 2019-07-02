@@ -2,11 +2,32 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from service.models import Player, Match,Country
-from service.serializers import MatchSerializer, MathcGetSerializer
+from service.serializers import MatchSerializer, MathcGetSerializer,\
+CpuSerializer, UserGetSerializer
 from rest_framework import status
 #from django.contrib.auth.models import User
 from service.models import UserProfile
 from rest_framework.authtoken.models import Token
+from rest_framework.generics import GenericAPIView 
+from django.conf import settings
+import requests
+from django.http import HttpResponse
+
+def oauth2redirect_view(request,*args, **kwargs):
+	code = request.GET.get("code")
+	return HttpResponse(code)
+
+def get_code_google_view(request):
+	token_request_uri = "https://accounts.google.com/o/oauth2/auth"
+	response_type = "code"
+	client_id = settings.CLIENT_ID
+	redirect_uri = "http://localhost:8000/oauth2redirect/"
+	scope = "https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+	url = f"{token_request_uri}?response_type={response_type}&client_id={client_id}&redirect_uri={redirect_uri}&scope={scope}"
+	resp = requests.get(url)
+	return HttpResponse(resp.text)
+def get_google_auth_view(request):
+	return render(request, "service/get_google_auth.html")
 
 class UserAPIView(APIView):
 	authenctication_classes = []
@@ -31,8 +52,21 @@ class UserAPIView(APIView):
 			token = tk.key
 		message = {"username":username, "token":token}
 		return Response(message)
-class MatchAPIView(APIView):
+	def get(self, request, email=None,format=None):
+		#params = request.query_params
+		#email=params.get("email")
+		if email:
+			users = UserProfile.objects.filter(email=email)
+		else:
+			users = UserProfile.objects.all()
+		if users:
+			users = UserGetSerializer(users, many=True)
+			return Response(users.data)
+		else:
+			return Response("No users found")
 
+class MatchAPIView(GenericAPIView):
+	serializer_class = MatchSerializer
 	def post(self, request,format=None):
 		data = request.data
 		ser = MatchSerializer(data=data)
@@ -92,12 +126,7 @@ class PlayerAPIView(APIView):
 		return Response(msg)
 
 		
-class CPU(APIView):
-	def get(self,request,format=None):
-		return Response("4")
-	def post(self):
-		pass
-	def put(self):
-		pass
-	def delete(self):
+class CPU(GenericAPIView ):
+	serializer_class = CpuSerializer
+	def post(self, request, format=None):
 		pass

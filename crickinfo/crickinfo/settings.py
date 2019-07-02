@@ -142,7 +142,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES":(
         #"rest_framework.permissions.IsAuthenticatedOrReadOnly",
         "rest_framework.permissions.IsAuthenticated",
-        )
+        ),
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ]
 }
 AUTH_USER_MODEL = "service.UserProfile"
 SWAGGER_SETTINGS = {
@@ -156,5 +161,5 @@ SWAGGER_SETTINGS = {
 }
 LOGIN_URL = 'rest_framework:login'
 LOGOUT_URL = 'rest_framework:logout'
-
-
+CLIENT_ID = "24086458263-g296ha50uvmmb79eqmnfmtbmtvndemau.apps.googleusercontent.com"
+CLIENT_SECRET = "hIbk1K-EhB3uPwrJYHeYx08R"

@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+class cpu(models.Model):
+	name = models.CharField(max_length=250)
+	number = models.IntegerField()
 class UserProfile(AbstractUser):
 	mobile = models.CharField(max_length=10,blank=True, null=True)
 class abst(models.Model): # abstract model

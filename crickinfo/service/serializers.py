@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from service.models import Match, Country, Player
+from service.models import Match, Country, Player, cpu, UserProfile
+class UserGetSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = UserProfile
+		fields = ["username","email","id"]
+class CpuSerializer(serializers.ModelSerializer):
+
+	class Meta:
+		model = cpu
+		fields = "__all__"
 
 class MathcGetSerializer(serializers.ModelSerializer):
 	country1 = serializers.CharField(source="country1.name")

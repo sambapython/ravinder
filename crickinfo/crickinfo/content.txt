@@ -1,0 +1,11 @@
+
+manual installation(with nginx, gunicorn, postgres)
+docker image creation
+automate the deployment using ansible.
+
+middlewares, signals, error handling(using middlewars)
+
+template system, 
+bootstrap adition to templates
+django forms
+token refresh
