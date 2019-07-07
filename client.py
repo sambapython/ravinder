@@ -48,7 +48,9 @@ print(resp.json())
 # 	headers=headers)
 # print(resp)
 # print(resp.json())
+
 headers = {"Authorization":"Token e6b4ee8b802492d122e59e8d771394445d797daf"}
+'''
 for i in range(10):
 	url = "http://localhost:8000/player/"
 	resp = requests.post(url, json={"name":"Rohit%s"%i,"age":32,"gender":"male"},headers=headers)
@@ -59,4 +61,10 @@ for i in range(2):
 	resp = requests.post(url,json={"name":"country%s"%i},headers=headers)
 	print(resp)
 	print(resp.json())
-
+'''
+headers = {"Authorization":"Token e6b4ee8b802492d122e59e8d771394445d797daf"}
+import requests
+#resp = requests.get("http://localhost:8000/user/",params={"email":"user3@gmail.com"})
+resp = requests.get("http://localhost:8000/user/user2@gmail.com/")
+print(resp)
+print(resp.json())

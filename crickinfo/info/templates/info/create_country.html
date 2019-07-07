@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<p>{{ message }}</p>
+	<h1>Country creation</h1>
+	<form method="post">
+		{% csrf_token %}
+		Country name: <input type="text" name="name">
+		<input type="submit" name="">
+	</form>
+</body>
+</html>

@@ -15,17 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from django.http import HttpResponse
-from service.views import CPU, PlayerAPIView, MatchAPIView, UserAPIView,\
-get_google_auth_view, get_code_google_view, oauth2redirect_view
-from rest_framework_swagger.views import get_swagger_view
-schema_view = get_swagger_view(title='Pastebin API')
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.generics import GenericAPIView
-class AuthTokenView(ObtainAuthToken, GenericAPIView):
-    pass
-
+from info.views import createcountryview
+from django.generic.views import TemplateView
 urlpatterns = [
-    path("info/",include("info.urls")),
-    path("api/",include("service.urls"))
+    path("",TemplateView.as_view(template_name="info/home.html"))
+    path("createcountry/",createcountryview)    
 ]

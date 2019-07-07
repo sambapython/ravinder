@@ -26,6 +26,19 @@ class AuthTokenView(ObtainAuthToken, GenericAPIView):
     pass
 
 urlpatterns = [
-    path("info/",include("info.urls")),
-    path("api/",include("service.urls"))
+    path(r'^api-token-auth/', AuthTokenView.as_view()),
+    path("ui/",schema_view),
+    path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('admin/', admin.site.urls),
+    path("cpu/",CPU.as_view()),
+    re_path("player/(?P<pk>[0-9]+)/",PlayerAPIView.as_view()),
+    path("player/",PlayerAPIView.as_view()),
+    re_path("match/(?P<pk>[0-9]+)/",MatchAPIView.as_view()),
+    path("match/",MatchAPIView.as_view()),
+    path("user/",UserAPIView.as_view()),
+    re_path("user/(?P<email>.+)/",UserAPIView.as_view()),
+    path("get_google_auth/",get_google_auth_view),
+    path("get_code_google/",get_code_google_view),
+    re_path("oauth2redirect/",oauth2redirect_view),
+    
 ]
