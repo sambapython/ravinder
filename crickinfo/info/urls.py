@@ -18,6 +18,6 @@ from django.urls import path, re_path, include
 from info.views import createcountryview
 from django.generic.views import TemplateView
 urlpatterns = [
-    path("",TemplateView.as_view(template_name="info/home.html"))
+    path("",TemplateView.as_view(template_name="info/home.html")),
     path("createcountry/",createcountryview)    
 ]
